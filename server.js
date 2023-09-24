@@ -12,14 +12,6 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-/* app.use((req, res, next) => {
-  console.log("new request made: ");
-  console.log("host: ", req.hostname);
-  console.log("path: ", req.path);
-  console.log("method: ", req.method);
-  next();
-}); */
-
 app.get("/notes", (req, res) =>
   res.sendFile("./public/notes.html", { root: __dirname })
 );
@@ -27,6 +19,28 @@ app.get("/notes", (req, res) =>
 app.get("/api/notes", (req, res) =>
   res.sendFile("./db/db.json", { root: __dirname })
 );
+
+app.delete("/api/notes/:id", (req, res) => {
+  console.log(req.body);
+  const noteId = req.params.id;
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Failed to read the data file." });
+    } else {
+      const parsedData = JSON.parse(data);
+      const result = parsedData.filter((note) => note.id !== noteId);
+      fs.writeFile("./db/db.json", JSON.stringify(result), (err) => {
+        if (err) {
+          console.error(err);
+          res.status(500).json({ error: "Failed to write data file." });
+        } else {
+          res.json(result);
+        }
+      });
+    }
+  });
+});
 
 app.post("/api/notes", (req, res) => {
   console.log(req.body);
