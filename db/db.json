@@ -1,8 +1,1 @@
-[
-  { "title": "Test Title", "text": "Test text" },
-  {
-    "title": "Wesley",
-    "text": "Is a great guy!",
-    "id": "114759d4-35de-42c5-b7d0-01bd2c5dc093"
-  }
-]
+[{"title":"Test Title","text":"Test text"},{"title":"Wesley","text":"Is a great guy!","id":"114759d4-35de-42c5-b7d0-01bd2c5dc093"}]

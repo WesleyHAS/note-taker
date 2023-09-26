@@ -1,25 +1,37 @@
+// Import required modules
 const fs = require("fs");
 const path = require("path");
 
+// Import and configure Express.js
 const express = require("express");
 const app = express();
+
+// Serve static files from the "public" directory
 app.use(express.static("public"));
 
+// Import the UUID library for generating unique IDs
 const { v4: uuidv4 } = require("uuid");
 
+// Set the server port to the specified environment variable or 3001 if not provided
 const PORT = process.env.PORT || 3001;
 
+// Enable JSON parsing for incoming requests
 app.use(express.json());
+
+// Enable URL-encoded data parsing for incoming requests
 app.use(express.urlencoded({ extended: true }));
 
+// Route to serve the "notes.html" page
 app.get("/notes", (req, res) =>
   res.sendFile("./public/notes.html", { root: __dirname })
 );
 
+// Route to retrieve notes from the JSON data file
 app.get("/api/notes", (req, res) =>
   res.sendFile("./db/db.json", { root: __dirname })
 );
 
+// Route to delete a note by ID
 app.delete("/api/notes/:id", (req, res) => {
   console.log(req.body);
   const noteId = req.params.id;
@@ -42,6 +54,7 @@ app.delete("/api/notes/:id", (req, res) => {
   });
 });
 
+// Route to add a new note
 app.post("/api/notes", (req, res) => {
   console.log(req.body);
   fs.readFile("./db/db.json", "utf8", (err, data) => {
@@ -59,10 +72,12 @@ app.post("/api/notes", (req, res) => {
   });
 });
 
+// Route to serve the "index.html" page for all other routes
 app.get("*", (req, res) =>
   res.sendFile("./public/index.html", { root: __dirname })
 );
 
+// Start the server on the specified port
 app.listen(PORT, () => {
   console.log("listening on port 3001");
 });
