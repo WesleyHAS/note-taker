@@ -33,7 +33,6 @@ app.get("/api/notes", (req, res) =>
 
 // Route to delete a note by ID
 app.delete("/api/notes/:id", (req, res) => {
-  console.log(req.body);
   const noteId = req.params.id;
   fs.readFile("./db/db.json", "utf8", (err, data) => {
     if (err) {
@@ -56,7 +55,6 @@ app.delete("/api/notes/:id", (req, res) => {
 
 // Route to add a new note
 app.post("/api/notes", (req, res) => {
-  console.log(req.body);
   fs.readFile("./db/db.json", "utf8", (err, data) => {
     if (err) {
       console.error(err);
