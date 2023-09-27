@@ -23,7 +23,7 @@ N/A
 
 ## Usage
 
-Go to the [project]() page and click on get started. Add your note and save. Your note will be saved on the left side on the screen and you will be able to access them as nedeed.
+Go to the [project](https://pacific-sea-55121-e1e3f466f860.herokuapp.com/) page and click on get started. Add your note and save. Your note will be saved on the left side on the screen and you will be able to access and delete them as nedeed.
 
 ## Credits
 
